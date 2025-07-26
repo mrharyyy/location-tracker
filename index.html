@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -29,11 +29,32 @@
       </select>
 
       <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
-      <input type="tel" id="mobile" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10" required />
+      <input
+        type="tel"
+        id="mobile"
+        placeholder="10 अंकों का मोबाइल नंबर"
+        maxlength="10"
+        required
+      />
 
-      <button type="submit">जमा करें</button>
+      <button type="submit" id="submitBtn">जमा करें</button>
+      <div id="loadingSpinner"></div>
     </form>
   </main>
+
+  <!-- Modal popup -->
+  <div id="popupModal" class="modal">
+    <div class="modal-content">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Emblem_of_India.svg/1024px-Emblem_of_India.svg.png"
+        alt="India Emblem"
+        class="modal-emblem"
+      />
+      <p>✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।</p>
+      <p>24 घंटे के अंदर आपको SMS प्राप्त होगा।</p>
+      <button id="closePopup">ठीक है</button>
+    </div>
+  </div>
 
   <footer>
     © 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित
