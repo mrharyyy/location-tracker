@@ -129,8 +129,6 @@ footer {
   color: #666;
   margin-top: 2rem;
 }
-/* ---- Emblem styling start ---- */
-
 .modal .emblem {
   width: 60px;
 }
@@ -141,5 +139,3 @@ footer {
   display: block;
   margin: 0 auto 10px auto;
 }
-
-/* ---- Emblem styling end ---- */
