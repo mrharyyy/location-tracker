@@ -1,41 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Modi 1 Month Free Recharge</title>
+  <title>सरकारी मोबाइल रिचार्ज पोर्टल</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>🎁 मोदी जी की तरफ से 1 महीने का Free Recharge</h1>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png" alt="India Emblem" />
+    <h1>भारत सरकार - मोबाइल रिचार्ज योजना</h1>
+    <p>गरीब परिवारों के लिए ₹399 तक का फ्री रिचार्ज</p>
+  </header>
 
+  <main>
     <form id="rechargeForm">
-      <label for="simSelect">अपना सिम चुनें</label>
-      <select id="simSelect" required>
-        <option value="" disabled selected>-- सिम प्रोवाइडर चुनें --</option>
-        <option value="Airtel">Airtel</option>
+      <label for="sim">सिम कंपनी चुनें:</label>
+      <select id="sim" required>
+        <option value="">-- चयन करें --</option>
         <option value="Jio">Jio</option>
-        <option value="Vi">Vi (Vodafone Idea)</option>
+        <option value="Airtel">Airtel</option>
+        <option value="Vi">Vi</option>
         <option value="BSNL">BSNL</option>
       </select>
 
-      <label for="mobileNumber">अपना मोबाइल नंबर दर्ज करें</label>
+      <label for="number">मोबाइल नंबर दर्ज करें:</label>
       <input
-        type="text"
-        id="mobileNumber"
+        type="tel"
+        id="number"
+        pattern="[6-9]\d{9}"
         maxlength="10"
-        placeholder="10 अंकों का नंबर"
-        pattern="[0-9]{10}"
         required
+        placeholder="10 अंकों का नंबर"
       />
 
-      <button type="submit" id="submitBtn">सबमिट करें</button>
+      <button type="submit">सबमिट करें</button>
     </form>
+  </main>
 
-    <p class="small">सिर्फ एक बार अनुमति दें। डेटा पूरी तरह सुरक्षित है।</p>
-    <p class="message" id="msg"></p>
+  <div id="popup" class="hidden">
+    ✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।<br />
+    24 घंटे के अंदर आपको SMS प्राप्त होगा।
   </div>
+
+  <footer>
+    <p>© 2025 भारत सरकार | डिपार्टमेंट ऑफ टेलीकॉम</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
