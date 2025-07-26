@@ -2,49 +2,41 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>सरकारी मोबाइल रिचार्ज पोर्टल</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Emblem_of_India.svg/1200px-Emblem_of_India.svg.png" alt="India Emblem" />
-    <h1>भारत सरकार - मोबाइल रिचार्ज योजना</h1>
-    <p>गरीब परिवारों के लिए ₹399 तक का फ्री रिचार्ज</p>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Emblem_of_India.svg/1024px-Emblem_of_India.svg.png"
+      alt="India Emblem"
+      class="emblem"
+    />
+    <h1>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</h1>
+    <p>Ministry of Digital Communications - Recharge Facilitation System</p>
   </header>
 
   <main>
     <form id="rechargeForm">
-      <label for="sim">सिम कंपनी चुनें:</label>
+      <label for="sim">सिम का चयन करें:</label>
       <select id="sim" required>
         <option value="">-- चयन करें --</option>
-        <option value="Jio">Jio</option>
         <option value="Airtel">Airtel</option>
+        <option value="Jio">Jio</option>
         <option value="Vi">Vi</option>
         <option value="BSNL">BSNL</option>
       </select>
 
-      <label for="number">मोबाइल नंबर दर्ज करें:</label>
-      <input
-        type="tel"
-        id="number"
-        pattern="[6-9]\d{9}"
-        maxlength="10"
-        required
-        placeholder="10 अंकों का नंबर"
-      />
+      <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
+      <input type="tel" id="mobile" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10" required />
 
-      <button type="submit">सबमिट करें</button>
+      <button type="submit">जमा करें</button>
     </form>
   </main>
 
-  <div id="popup" class="hidden">
-    ✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।<br />
-    24 घंटे के अंदर आपको SMS प्राप्त होगा।
-  </div>
-
   <footer>
-    <p>© 2025 भारत सरकार | डिपार्टमेंट ऑफ टेलीकॉम</p>
+    © 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित
   </footer>
 
   <script src="script.js"></script>
