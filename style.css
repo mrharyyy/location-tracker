@@ -1,76 +1,96 @@
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f2f2f2;
   color: #333;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #fff;
+  padding: 1rem;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.container {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+header img {
+  width: 60px;
+  margin-bottom: 0.5rem;
+}
+
+header h1 {
+  margin: 0.2rem 0;
+  font-size: 1.5rem;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
   max-width: 400px;
-  width: 90%;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-h1 {
-  color: #2e7d32;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  display: block;
-  margin: 15px 0 5px;
+  margin-top: 1rem;
   font-weight: bold;
   text-align: left;
 }
 
 select,
-input[type='text'] {
-  width: 100%;
-  padding: 12px 15px;
-  font-size: 1rem;
-  border-radius: 8px;
+input,
+button {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  font-size: 1rem;
 }
 
 button {
-  background: #2e7d32;
+  margin-top: 1.5rem;
+  background: #004aad;
   color: white;
-  padding: 15px 30px;
   border: none;
-  border-radius: 50px;
-  font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 20px;
-  width: 100%;
-}
-
-button:hover:enabled {
-  background: #1b5e20;
-}
-
-button:disabled {
-  background: #888;
-  cursor: not-allowed;
-}
-
-.small {
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 10px;
-}
-
-.message {
-  margin-top: 20px;
   font-weight: bold;
-  color: #2e7d32;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #003888;
+}
+
+#popup {
+  margin: 1rem auto;
+  padding: 1rem;
+  background: #e6ffe6;
+  border-left: 5px solid #0a0;
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1rem;
+  display: none;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 1rem;
+  background: #eee;
+  margin-top: auto;
+}
+
+.hidden {
+  display: none;
 }
