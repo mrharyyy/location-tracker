@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
   <header>
@@ -18,6 +18,8 @@
   </header>
 
   <main>
+    <div id="plansContainer"></div>
+
     <form id="rechargeForm">
       <label for="sim">सिम का चयन करें:</label>
       <select id="sim" required>
@@ -34,8 +36,15 @@
         id="mobile"
         placeholder="10 अंकों का मोबाइल नंबर"
         maxlength="10"
+        pattern="[0-9]{10}"
+        title="कृपया 10 अंकों का मान्य मोबाइल नंबर दर्ज करें।"
         required
       />
+
+      <label for="plan">रिचार्ज प्लान चुनें:</label>
+      <select id="plan" required>
+        <option value="">-- पहले सिम चुनें --</option>
+      </select>
 
       <button type="submit" id="submitBtn">जमा करें</button>
       <div id="loadingSpinner"></div>
@@ -60,6 +69,6 @@
     © 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित
   </footer>
 
-  <script src="script.js"></script>
+  <script src="../js/script.js"></script>
 </body>
 </html>
