@@ -1,3 +1,11 @@
+html, body {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #f1f5f9;
@@ -32,6 +40,7 @@ input {
   padding: 10px;
   margin-top: 8px;
   font-size: 16px;
+  line-height: 1.4;
   border-radius: 6px;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -64,4 +73,11 @@ button:hover:not(:disabled) {
   font-size: 1.1rem;
   color: green;
   min-height: 24px;
+}
+
+/* Mobile keyboard fix: extra space below */
+@media (max-width: 600px) {
+  .container {
+    margin-bottom: 150px;
+  }
 }
