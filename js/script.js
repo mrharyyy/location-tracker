@@ -157,3 +157,10 @@ ${locationText}`;
   submitBtn.disabled = false;
   submitBtn.textContent = "सबमिट करें";
 });
+
+// Scroll fix for mobile keyboard
+mobileInput.addEventListener("focus", () => {
+  setTimeout(() => {
+    mobileInput.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 300);
+});
