@@ -38,14 +38,27 @@
   />
 
   <div id="plans" style="display:none;">
-    <h3>रिचार्ज योजना</h3>
-    <ul id="plan-list"></ul>
+    <h3>रिचार्ज योजना चुनें:</h3>
+    <form id="plansForm"></form>
   </div>
 
   <button id="submitBtn">रिचार्ज के लिए आवेदन करें</button>
 
   <div id="statusMessage" style="margin-top: 15px; color: green; font-weight: 600;"></div>
 </main>
+
+<!-- Modal Popup -->
+<div id="popupModal" class="modal">
+  <div class="modal-content">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
+      alt="भारत सरकार का चिन्ह"
+      class="modal-emblem"
+    />
+    <p id="popupText">आपका रिचार्ज आवेदन सफलतापूर्वक भेज दिया गया है। 24 घंटे में SMS प्राप्त होगा।</p>
+    <button id="closePopupBtn">ठीक है</button>
+  </div>
+</div>
 
 <footer>© 2025 सक्षम | भारत सरकार द्वारा समर्थित सेवा</footer>
 
