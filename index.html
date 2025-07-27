@@ -1,28 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bharat Recharge Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="container">
-    <div class="header">
+    <header>
       <img src="assets/emblem.svg" alt="India Emblem" class="emblem" />
-      <h1>भारत सरकार रिचार्ज सेवा</h1>
-      <p>Official Recharge Portal | Location Based Plans</p>
+      <h1>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</h1>
+      <p>Ministry of Digital Communications - Recharge Facilitation System</p>
+    </header>
+
+    <main>
+      <form id="rechargeForm">
+        <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
+        <input
+          type="tel"
+          id="mobile"
+          placeholder="10 अंकों का मोबाइल नंबर"
+          maxlength="10"
+          required
+          pattern="[6-9][0-9]{9}"
+          title="कृपया 10 अंकों का वैध मोबाइल नंबर दर्ज करें।"
+        />
+
+        <label for="plan">रिचार्ज प्लान चुनें:</label>
+        <select id="plan" required>
+          <option value="">-- प्लान चुनें --</option>
+          <option value="₹199 - 28 दिन - 1.5GB/दिन">₹199 - 28 दिन - 1.5GB/दिन</option>
+          <option value="₹399 - 56 दिन - 2GB/दिन">₹399 - 56 दिन - 2GB/दिन</option>
+          <option value="₹599 - 84 दिन - 3GB/दिन">₹599 - 84 दिन - 3GB/दिन</option>
+        </select>
+
+        <button type="submit" id="submitBtn">रिचार्ज शुरू करें</button>
+        <div id="loadingSpinner"></div>
+      </form>
+    </main>
+
+    <div id="popupModal" class="modal">
+      <div class="modal-content">
+        <img src="assets/emblem.svg" alt="India Emblem" class="emblem" />
+        <p>✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।</p>
+        <p>24 घंटे के अंदर आपको SMS प्राप्त होगा।</p>
+        <button id="closePopup">ठीक है</button>
+      </div>
     </div>
 
-    <div class="form-section">
-      <input type="tel" id="mobile" placeholder="Enter your mobile number" />
-      <button onclick="showPlans()">View Plans</button>
-    </div>
-
-    <div id="plans" class="plans-container"></div>
+    <footer>© 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित</footer>
   </div>
 
-  <script src="js/location.js"></script>
-  <script src="js/plans.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
