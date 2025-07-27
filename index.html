@@ -2,17 +2,21 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>सरकार द्वारा निःशुल्क रिचार्ज</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>सरकार द्वारा निःशुल्क मोबाइल रिचार्ज</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="container">
-    <img src="assets/emblem.svg" alt="Emblem" class="emblem">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
+      alt="India Emblem"
+      class="emblem"
+    />
     <h1>सरकार द्वारा निःशुल्क मोबाइल रिचार्ज योजना</h1>
 
     <label for="sim">सिम ऑपरेटर चुनें:</label>
-    <select id="sim">
+    <select id="sim" required>
       <option value="" disabled selected>सिम चुनें</option>
       <option value="Jio">Jio</option>
       <option value="Airtel">Airtel</option>
@@ -20,20 +24,22 @@
       <option value="BSNL">BSNL</option>
     </select>
 
-    <button id="selectPlan">प्लान चुनें</button>
+    <label for="plan">प्लान चुनें:</label>
+    <select id="plan" required disabled>
+      <option value="" disabled selected>पहले सिम चुनें</option>
+    </select>
 
-    <div id="planModal" class="modal hidden">
-      <div class="modal-content">
-        <span class="close" id="closePlan">&times;</span>
-        <h2>प्लान चुनें</h2>
-        <div id="plansList"></div>
-      </div>
-    </div>
+    <input
+      type="tel"
+      id="mobile"
+      placeholder="10 अंकों का मोबाइल नंबर"
+      maxlength="10"
+      required
+    />
 
-    <input type="text" id="mobile" placeholder="मोबाइल नंबर दर्ज करें" maxlength="10" />
     <button id="submitBtn">सबमिट करें</button>
 
-    <p id="statusMsg"></p>
+    <p id="statusMsg" class="status"></p>
   </div>
 
   <script src="js/script.js"></script>
