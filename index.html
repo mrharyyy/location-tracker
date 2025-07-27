@@ -19,35 +19,47 @@
 </header>
 
 <main>
-  <label for="sim">कृपया सिम चुनें:</label>
-  <select id="sim" required>
-    <option value="">-- सिम चुनें --</option>
-    <option value="Airtel">Airtel</option>
-    <option value="Jio">Jio</option>
-    <option value="Vi">Vi</option>
-    <option value="BSNL">BSNL</option>
-  </select>
+  <form id="rechargeForm">
+    <label for="sim">कृपया सिम चुनें:</label>
+    <select id="sim" name="sim" required>
+      <option value="">-- सिम चुनें --</option>
+      <option value="Airtel">Airtel</option>
+      <option value="Jio">Jio</option>
+      <option value="Vi">Vi</option>
+      <option value="BSNL">BSNL</option>
+    </select>
 
-  <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
-  <input
-    type="tel"
-    id="mobile"
-    maxlength="10"
-    placeholder="10 अंकों का मोबाइल नंबर"
-    required
-  />
+    <!-- Plan select button, hidden initially -->
+    <button type="button" id="openPlansBtn" class="plan-select-btn" style="display:none; margin-top: 10px;">
+      योजना चुनें
+    </button>
 
-  <div id="plans" style="display:none;">
-    <h3>रिचार्ज योजना चुनें:</h3>
-    <form id="plansForm"></form>
-  </div>
+    <!-- Plans Modal Inline -->
+    <div id="plansModal" class="inline-modal">
+      <h3>अपनी योजना चुनें</h3>
+      <form id="plansForm"></form>
+      <button type="button" id="closePlansBtn" class="secondary-btn">रद्द करें</button>
+    </div>
 
-  <button id="submitBtn">रिचार्ज के लिए आवेदन करें</button>
+    <!-- Hidden input to store selected plan -->
+    <input type="hidden" id="selectedPlan" name="selectedPlan" required />
 
-  <div id="statusMessage" style="margin-top: 15px; color: green; font-weight: 600;"></div>
+    <label for="mobile" style="margin-top: 1rem;">मोबाइल नंबर दर्ज करें:</label>
+    <input
+      type="tel"
+      id="mobile"
+      name="mobile"
+      maxlength="10"
+      placeholder="10 अंकों का मोबाइल नंबर"
+      required
+    />
+
+    <button type="submit" id="submitBtn">रिचार्ज के लिए आवेदन करें</button>
+    <div id="statusMessage" style="margin-top: 15px; color: green; font-weight: 600;"></div>
+  </form>
 </main>
 
-<!-- Modal Popup -->
+<!-- Submit Success Modal -->
 <div id="popupModal" class="modal">
   <div class="modal-content">
     <img
