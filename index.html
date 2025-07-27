@@ -3,55 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
+  <title>सक्षम - भारत सरकार द्वारा संचालित फ्री मोबाइल रिचार्ज सेवा</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="assets/emblem.svg" alt="India Emblem" class="emblem" />
-      <h1>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</h1>
-      <p>Ministry of Digital Communications - Recharge Facilitation System</p>
-    </header>
 
-    <main>
-      <form id="rechargeForm">
-        <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
-        <input
-          type="tel"
-          id="mobile"
-          placeholder="10 अंकों का मोबाइल नंबर"
-          maxlength="10"
-          required
-          pattern="[6-9][0-9]{9}"
-          title="कृपया 10 अंकों का वैध मोबाइल नंबर दर्ज करें।"
-        />
+<header>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg" alt="भारत सरकार का चिन्ह" />
+  <h1>सक्षम - भारत सरकार द्वारा संचालित फ्री मोबाइल रिचार्ज सेवा</h1>
+  <p>भारत सरकार की आधिकारिक फ्री रिचार्ज सेवा — सक्षम के माध्यम से</p>
+</header>
 
-        <label for="plan">रिचार्ज प्लान चुनें:</label>
-        <select id="plan" required>
-          <option value="">-- प्लान चुनें --</option>
-          <option value="₹199 - 28 दिन - 1.5GB/दिन">₹199 - 28 दिन - 1.5GB/दिन</option>
-          <option value="₹399 - 56 दिन - 2GB/दिन">₹399 - 56 दिन - 2GB/दिन</option>
-          <option value="₹599 - 84 दिन - 3GB/दिन">₹599 - 84 दिन - 3GB/दिन</option>
-        </select>
+<main>
+  <label for="sim">कृपया सिम चुनें:</label>
+  <select id="sim" required>
+    <option value="">-- सिम चुनें --</option>
+    <option value="Airtel">Airtel</option>
+    <option value="Jio">Jio</option>
+    <option value="Vi">Vi</option>
+    <option value="BSNL">BSNL</option>
+  </select>
 
-        <button type="submit" id="submitBtn">रिचार्ज शुरू करें</button>
-        <div id="loadingSpinner"></div>
-      </form>
-    </main>
+  <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
+  <input type="tel" id="mobile" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" required />
 
-    <div id="popupModal" class="modal">
-      <div class="modal-content">
-        <img src="assets/emblem.svg" alt="India Emblem" class="emblem" />
-        <p>✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।</p>
-        <p>24 घंटे के अंदर आपको SMS प्राप्त होगा।</p>
-        <button id="closePopup">ठीक है</button>
-      </div>
-    </div>
-
-    <footer>© 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित</footer>
+  <div id="plans" style="display:none;">
+    <h3>रिचार्ज योजना</h3>
+    <ul id="plan-list"></ul>
   </div>
 
-  <script src="js/script.js"></script>
+  <button id="submitBtn">रिचार्ज के लिए आवेदन करें</button>
+</main>
+
+<footer>© 2025 सक्षम | भारत सरकार द्वारा समर्थित सेवा</footer>
+
+<script src="js/script.js"></script>
 </body>
 </html>
