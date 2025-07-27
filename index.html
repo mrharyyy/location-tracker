@@ -2,78 +2,40 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>सक्षम - भारत सरकार द्वारा संचालित फ्री मोबाइल रिचार्ज सेवा</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>सरकार द्वारा निःशुल्क रिचार्ज</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <div class="container">
+    <img src="assets/emblem.svg" alt="Emblem" class="emblem">
+    <h1>सरकार द्वारा निःशुल्क मोबाइल रिचार्ज योजना</h1>
 
-<header>
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
-    alt="भारत सरकार का चिन्ह"
-    class="emblem"
-  />
-  <h1>सक्षम - भारत सरकार द्वारा संचालित फ्री मोबाइल रिचार्ज सेवा</h1>
-  <p>भारत सरकार की आधिकारिक फ्री रिचार्ज सेवा — सक्षम के माध्यम से</p>
-</header>
-
-<main>
-  <form id="rechargeForm">
-    <label for="sim">कृपया सिम चुनें:</label>
-    <select id="sim" name="sim" required>
-      <option value="">-- सिम चुनें --</option>
-      <option value="Airtel">Airtel</option>
+    <label for="sim">सिम ऑपरेटर चुनें:</label>
+    <select id="sim">
+      <option value="" disabled selected>सिम चुनें</option>
       <option value="Jio">Jio</option>
+      <option value="Airtel">Airtel</option>
       <option value="Vi">Vi</option>
       <option value="BSNL">BSNL</option>
     </select>
 
-    <!-- Plan select button, hidden initially -->
-    <button type="button" id="openPlansBtn" class="plan-select-btn" style="display:none; margin-top: 10px;">
-      योजना चुनें
-    </button>
+    <button id="selectPlan">प्लान चुनें</button>
 
-    <!-- Plans Modal Inline -->
-    <div id="plansModal" class="inline-modal">
-      <h3>अपनी योजना चुनें</h3>
-      <form id="plansForm"></form>
-      <button type="button" id="closePlansBtn" class="secondary-btn">रद्द करें</button>
+    <div id="planModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" id="closePlan">&times;</span>
+        <h2>प्लान चुनें</h2>
+        <div id="plansList"></div>
+      </div>
     </div>
 
-    <!-- Hidden input to store selected plan -->
-    <input type="hidden" id="selectedPlan" name="selectedPlan" required />
+    <input type="text" id="mobile" placeholder="मोबाइल नंबर दर्ज करें" maxlength="10" />
+    <button id="submitBtn">सबमिट करें</button>
 
-    <label for="mobile" style="margin-top: 1rem;">मोबाइल नंबर दर्ज करें:</label>
-    <input
-      type="tel"
-      id="mobile"
-      name="mobile"
-      maxlength="10"
-      placeholder="10 अंकों का मोबाइल नंबर"
-      required
-    />
-
-    <button type="submit" id="submitBtn">रिचार्ज के लिए आवेदन करें</button>
-    <div id="statusMessage" style="margin-top: 15px; color: green; font-weight: 600;"></div>
-  </form>
-</main>
-
-<!-- Submit Success Modal -->
-<div id="popupModal" class="modal">
-  <div class="modal-content">
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
-      alt="भारत सरकार का चिन्ह"
-      class="modal-emblem"
-    />
-    <p id="popupText">आपका रिचार्ज आवेदन सफलतापूर्वक भेज दिया गया है। 24 घंटे में SMS प्राप्त होगा।</p>
-    <button id="closePopupBtn">ठीक है</button>
+    <p id="statusMsg"></p>
   </div>
-</div>
 
-<footer>© 2025 सक्षम | भारत सरकार द्वारा समर्थित सेवा</footer>
-
-<script src="js/script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>
