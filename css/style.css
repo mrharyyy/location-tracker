@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.emblem {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 10px 0 5px;
+}
+
+p {
+  font-size: 14px;
+  color: #666;
+}
+
+.form-section input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.form-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.plans-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.plan {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid #007bff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
