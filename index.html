@@ -1,74 +1,28 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bharat Recharge Portal</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
-      alt="India Emblem"
-      class="emblem"
-    />
-    <h1>भारत सरकार - मोबाइल रिचार्ज सहायता पोर्टल</h1>
-    <p>Ministry of Digital Communications - Recharge Facilitation System</p>
-  </header>
-
-  <main>
-    <div id="plansContainer"></div>
-
-    <form id="rechargeForm">
-      <label for="sim">सिम का चयन करें:</label>
-      <select id="sim" required>
-        <option value="">-- चयन करें --</option>
-        <option value="Airtel">Airtel</option>
-        <option value="Jio">Jio</option>
-        <option value="Vi">Vi</option>
-        <option value="BSNL">BSNL</option>
-      </select>
-
-      <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
-      <input
-        type="tel"
-        id="mobile"
-        placeholder="10 अंकों का मोबाइल नंबर"
-        maxlength="10"
-        pattern="[0-9]{10}"
-        title="कृपया 10 अंकों का मान्य मोबाइल नंबर दर्ज करें।"
-        required
-      />
-
-      <label for="plan">रिचार्ज प्लान चुनें:</label>
-      <select id="plan" required>
-        <option value="">-- पहले सिम चुनें --</option>
-      </select>
-
-      <button type="submit" id="submitBtn">जमा करें</button>
-      <div id="loadingSpinner"></div>
-    </form>
-  </main>
-
-  <!-- Modal popup -->
-  <div id="popupModal" class="modal">
-    <div class="modal-content">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
-        alt="India Emblem"
-        class="emblem"
-      />
-      <p>✅ आपका रिचार्ज अनुरोध सफलतापूर्वक जमा हो गया है।</p>
-      <p>24 घंटे के अंदर आपको SMS प्राप्त होगा।</p>
-      <button id="closePopup">ठीक है</button>
+  <div class="container">
+    <div class="header">
+      <img src="assets/emblem.svg" alt="India Emblem" class="emblem" />
+      <h1>भारत सरकार रिचार्ज सेवा</h1>
+      <p>Official Recharge Portal | Location Based Plans</p>
     </div>
+
+    <div class="form-section">
+      <input type="tel" id="mobile" placeholder="Enter your mobile number" />
+      <button onclick="showPlans()">View Plans</button>
+    </div>
+
+    <div id="plans" class="plans-container"></div>
   </div>
 
-  <footer>
-    © 2025 Bharat Sarkar | भारत सरकार द्वारा संरक्षित
-  </footer>
-
-  <script src="../js/script.js"></script>
+  <script src="js/location.js"></script>
+  <script src="js/plans.js"></script>
 </body>
 </html>
