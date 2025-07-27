@@ -9,7 +9,11 @@
 <body>
 
 <header>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg" alt="भारत सरकार का चिन्ह" />
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Emblem_of_India_%28navy_blue%29.svg"
+    alt="भारत सरकार का चिन्ह"
+    class="emblem"
+  />
   <h1>सक्षम - भारत सरकार द्वारा संचालित फ्री मोबाइल रिचार्ज सेवा</h1>
   <p>भारत सरकार की आधिकारिक फ्री रिचार्ज सेवा — सक्षम के माध्यम से</p>
 </header>
@@ -25,7 +29,13 @@
   </select>
 
   <label for="mobile">मोबाइल नंबर दर्ज करें:</label>
-  <input type="tel" id="mobile" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" required />
+  <input
+    type="tel"
+    id="mobile"
+    maxlength="10"
+    placeholder="10 अंकों का मोबाइल नंबर"
+    required
+  />
 
   <div id="plans" style="display:none;">
     <h3>रिचार्ज योजना</h3>
@@ -33,6 +43,8 @@
   </div>
 
   <button id="submitBtn">रिचार्ज के लिए आवेदन करें</button>
+
+  <div id="statusMessage" style="margin-top: 15px; color: green; font-weight: 600;"></div>
 </main>
 
 <footer>© 2025 सक्षम | भारत सरकार द्वारा समर्थित सेवा</footer>
